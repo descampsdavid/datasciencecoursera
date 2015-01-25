@@ -66,6 +66,9 @@ Classes 'data.table' and 'data.frame':	11880 obs. of  11 variables:
 Instructions
 ============
 
+Just execute the R script called `run_analysis.R`. This script does the following :
+
+0. Download the dataset if it is not in the working directory
 1. Get the needed files in datatables and merge them:
 	- fread() `Y_train.txt` and `Y_test.txt`, then rbind() them to merge all activities ids,
 	- fread() `subject_train.txt` and `subject_test.txt`, then rbind() them for all subjects ids,
@@ -80,7 +83,7 @@ Instructions
 	- melt and merge were used to manipulate and minimise the datatable
 5. Categorize the features in different columns and label them as well as their type
 	- For each feature, create a temporary matrix by selecting the right rows with grep
-	- add the matrix as a new column and factor the different values (1, 2 or 3)
+	- add the matrix as a new column and factor the different values (1, 2 or 3 depending the feature)
 6. Create the second tidy set requested and adding in it the average of each variable for each activity and each subject
 	- setkey to "tag" the columns that will be needed
 	- select the tagged columns by keys, and add the average with list()
