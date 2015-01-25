@@ -66,8 +66,22 @@ Classes 'data.table' and 'data.frame':	11880 obs. of  11 variables:
 Instructions
 ============
 
-1. Get and merge the files :
-	- fread() `subject_train.txt` and `subject_test.txt` and rbind() them 
-	- same for `Y_train.txt` and `Y_test.txt`, `X_train.txt` and `X_test.txt`
-	- Due to a bug in fread(), as.data.table(read.table()) was used instead
+1. Get the needed files in datatables and merge them:
+	- fread() `Y_train.txt` and `Y_test.txt`, then rbind() them to merge all activities ids,
+	- fread() `subject_train.txt` and `subject_test.txt`, then rbind() them for all subjects ids,
+	- For the sets with the files `X_train.txt` and `X_test.txt`, as.data.table(read.table()) was used instead of fread() due to a bug.
+	- fread() `activity_labels.txt` for the labels of the activities
+	- fread() also `features.txt` that will be used later
+	
+2. Column-bind with cbind() activity ids and subject ids in the datatable of the sets
+3. Merge the labels of the activities in the datatable of the sets, with the activity id column.
+4. Filter the datatable of the sets to keep mean and standard deviations measurements
+	- grep was used to select the appropriate measurements
+	- melt and merge were used to manipulate and minimise the datatable
+5. Categorize the features in different columns and label them as well as their type
+	- For each feature, factor the different values (1, 2 or 3) by selecting the right rows with grep
+6. Create the second tidy set requested and adding in it the average of each variable for each activity and each subject
+	- setkey to "tag" the columns that will be needed
+	- select the tagged columns by keys, and add the average with list()
+7. Save the tidy set with write.table()
 	
