@@ -24,7 +24,28 @@ https://class.coursera.org/getdata-010
 > 4. Appropriately labels the data set with descriptive variable names. 
 > 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
-The input data that was tested for this project was downloaded on Tue 20 Jan 22:29:00 2015
+The input data that was tested for this project was downloaded on Tue 20 Jan 22:29:00 2015 and with the following configuration :
+
+```R
+
+> version
+_                           
+platform       x86_64-apple-darwin13.4.0   
+arch           x86_64                      
+os             darwin13.4.0                
+system         x86_64, darwin13.4.0        
+status                                     
+major          3                           
+minor          1.2                         
+year           2014                        
+month          10                          
+day            31                          
+svn rev        66913                       
+language       R                           
+version.string R version 3.1.2 (2014-10-31)
+nickname       Pumpkin Helmet  
+
+```
 
 Steps to reproduce this project
 -------------------------------
