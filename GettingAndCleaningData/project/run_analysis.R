@@ -21,7 +21,8 @@ dtActivityTrain <- fread(filePath)
 filePath <- file.path(inputDir, "test", "Y_test.txt")
 dtActivityTest <- fread(filePath)
 filePath <- file.path(inputDir, "train", "X_train.txt")
-#workaround a bug with fread
+#workaround a bug with fread 
+#hat tip to https://class.coursera.org/getdata-010/forum/thread?thread_id=270#post-1229
 dtTrain <- as.data.table(read.table(filePath))
 filePath <- file.path(inputDir, "test", "X_test.txt")
 #same bug
@@ -78,6 +79,7 @@ dtMain <- data.table(melt(dtMain, key(dtMain), variable.name = "featureCode"))
 dtMain <- merge(dtMain, dtFeatures[, list(featureCode, feature)], by = "featureCode", 
             all.x = TRUE)
 
+# Split the measurements in columns and label them appropriately (requirement 4)
 # Features with 1 category (is 'something' or not)
 dtMain$Jerk <- factor(grepl("Jerk", dtMain$feature), labels = c(NA, "Jerk"))
 dtMain$Magnitude <- factor(grepl("Mag", dtMain$feature), labels = c(NA, "Magnitude"))
