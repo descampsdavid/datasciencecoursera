@@ -2,7 +2,8 @@
 
 Author: David Descamps
 
-### Study design
+Study design
+============
 
 The data was downloaded from the following url :
 
@@ -18,7 +19,8 @@ The unit used in the dataset is standard gravity unit 'g'.
 
 As requested for the project, the only measurements used are the mean and standard deviation for each measurement.
 
-### Codebook
+Codebook
+========
 
 Variable list and descriptions
 ------------------------------
@@ -30,10 +32,10 @@ activity       | Activity name
 Domain         | Feature: `Time` or `Frequency` domain signal
 Instrument     | Feature: `Accelerometer` or `Gyroscope` measuring instrument
 Acceleration   | Feature: `Body` or `Gravity` acceleration signal
-Variable       | Feature: Mean or Std (Standard deviation)
-Jerk           | Feature: Jerk signal
-Magnitude      | Feature: Magnitude of the signals calculated using the Euclidean norm
-Axis           | Feature: 3-axial signals in the X, Y and Z directions (X, Y, or Z)
+Variable       | Feature: `Mean` or `Std` (Standard deviation)
+Jerk           | Feature: `Jerk` signal
+Magnitude      | Feature: `Magnitude` of the signals calculated using the Euclidean norm
+Axis           | Feature: 3-axial signals in the `X`, `Y` and `Z` directions
 count          | Count of data points used to compute `average`
 average        | The average of each variable for each activity and each subject
 
@@ -60,3 +62,12 @@ Classes 'data.table' and 'data.frame':	11880 obs. of  11 variables:
  - attr(*, "sorted")= chr  "subject" "activity" "Jerk" "Magnitude" ...
  - attr(*, ".internal.selfref")=<externalptr> 
 ```
+
+Instructions
+============
+
+1. Get and merge the files :
+	- fread() `subject_train.txt` and `subject_test.txt` and rbind() them 
+	- same for `Y_train.txt` and `Y_test.txt`, `X_train.txt` and `X_test.txt`
+	- Due to a bug in fread(), as.data.table(read.table()) was used instead
+	
