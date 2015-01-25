@@ -49,7 +49,7 @@ dtMain <- cbind(dtSubject, dtActivity, dtMain)
 dtMain <- merge(dtMain, dtActivityNames, by = "activityCode", all.x = TRUE)
 
 #set keys
-setkey(dtMain, subject, activityCode, activityName)
+setkey(dtMain, subject, activityCode, activityName) ###requirement 3
 
 #Extracts only the measurements on the mean and 
 # standard deviation for each measurement. 
@@ -58,7 +58,7 @@ setkey(dtMain, subject, activityCode, activityName)
 # get the features that have only "mean" and "std"
 # in their name
 
-dtFeatures <- dtFeatures[grepl("mean\\(\\)|std\\(\\)", featureName)]
+dtFeatures <- dtFeatures[grepl("(mean|std)\\(", featureName)]
 
 #the featureCode values in dtFeatures should matched 
 # with column names in dtMain 
@@ -104,7 +104,7 @@ dtMain$Axis <- factor(x %*% y, labels = c(NA, "X", "Y", "Z"))
 
 setkey(dtMain, subject, activity, Jerk, Magnitude, Domain, Acceleration, Instrument, 
       Measurement, Axis)
-dtTidy <- dtMain[, list(count = .N, average = mean(value)), by = key(dtMain)]
+dtTidy <- dtMain[, list(count = .N, average = mean(value)), by = key(dtMain)] ##requirement 5
 
 f <- file.path(workingDir, "HumanActivityRecognitionUsingSmartphonesDataset_tidyset.txt")
 write.table(dtTidy, f, quote = FALSE, sep = "\t", row.names = FALSE)
