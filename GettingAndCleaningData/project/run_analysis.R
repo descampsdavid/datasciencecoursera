@@ -39,8 +39,8 @@ dtMain <- rbind(dtTrain, dtTest) ###requirement 1
 #setnames
 setnames(dtSubject, "V1", "subject")
 setnames(dtActivity, "V1", "activityCode")
-setnames(dtActivityNames, names(dtActivityNames), c("activityCode", "activityName"))
-setnames(dtFeatures, names(dtFeatures), c("featureCode", "featureName"))
+setnames(dtActivityNames, names(dtActivityNames), c("activityCode", "activity"))
+setnames(dtFeatures, names(dtFeatures), c("featureCode", "feature"))
 
 #merge subject and activities columns (cbind) in main datatable
 dtMain <- cbind(dtSubject, dtActivity, dtMain)
@@ -49,7 +49,7 @@ dtMain <- cbind(dtSubject, dtActivity, dtMain)
 dtMain <- merge(dtMain, dtActivityNames, by = "activityCode", all.x = TRUE)
 
 #set keys
-setkey(dtMain, subject, activityCode, activityName) ###requirement 3
+setkey(dtMain, subject, activityCode, activity) ###requirement 3
 
 #Extracts only the measurements on the mean and 
 # standard deviation for each measurement. 
@@ -58,7 +58,7 @@ setkey(dtMain, subject, activityCode, activityName) ###requirement 3
 # get the features that have only "mean" and "std"
 # in their name
 
-dtFeatures <- dtFeatures[grepl("(mean|std)\\(", featureName)]
+dtFeatures <- dtFeatures[grepl("(mean|std)\\(", feature)]
 
 #the featureCode values in dtFeatures should matched 
 # with column names in dtMain 
@@ -75,10 +75,8 @@ dtMain <- dtMain[, select, with = FALSE]
 #now we have the main datatable with the required variables
 #we still need to put descriptive activity names to columns
 dtMain <- data.table(melt(dtMain, key(dtMain), variable.name = "featureCode"))
-dtMain <- merge(dtMain, dtFeatures[, list(featureCode, featureName)], by = "featureCode", 
+dtMain <- merge(dtMain, dtFeatures[, list(featureCode, feature)], by = "featureCode", 
             all.x = TRUE)
-dtMain$activity <- factor(dtMain$activityName)
-dtMain$feature <- factor(dtMain$featureName)
 
 # Features with 1 category (is 'something' or not)
 dtMain$Jerk <- factor(grepl("Jerk", dtMain$feature), labels = c(NA, "Jerk"))
@@ -106,5 +104,7 @@ setkey(dtMain, subject, activity, Jerk, Magnitude, Domain, Acceleration, Instrum
       Measurement, Axis)
 dtTidy <- dtMain[, list(count = .N, average = mean(value)), by = key(dtMain)] ##requirement 5
 
-f <- file.path(workingDir, "HumanActivityRecognitionUsingSmartphonesDataset_tidyset.txt")
+#f <- file.path(workingDir, "HAR_UsingSmartphonesDataset_set.txt")
+#write.table(dtMain, f, quote = FALSE, sep = "\t", row.names = FALSE)
+f <- file.path(workingDir, "HAR_UsingSmartphonesDataset_tidyset.txt")
 write.table(dtTidy, f, quote = FALSE, sep = "\t", row.names = FALSE)
