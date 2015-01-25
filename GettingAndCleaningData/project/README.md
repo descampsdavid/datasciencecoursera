@@ -50,7 +50,11 @@ nickname       Pumpkin Helmet
 Steps to reproduce this project
 -------------------------------
 
-1. Simply run the R script `run_analysis.r`, note that the script will download the input data if it is not present in the working directory.
+1. Simply run the R script `run_analysis.r`
+
+Mote that 
+- the script will download the input data if it is not present in the working directory.
+- the script requires the "data.table" and "reshape2" packages.
 
 Output produced
 ---------------
