@@ -79,7 +79,8 @@ Instructions
 	- grep was used to select the appropriate measurements
 	- melt and merge were used to manipulate and minimise the datatable
 5. Categorize the features in different columns and label them as well as their type
-	- For each feature, factor the different values (1, 2 or 3) by selecting the right rows with grep
+	- For each feature, create a temporary matrix by selecting the right rows with grep
+	- add the matrix as a new column and factor the different values (1, 2 or 3)
 6. Create the second tidy set requested and adding in it the average of each variable for each activity and each subject
 	- setkey to "tag" the columns that will be needed
 	- select the tagged columns by keys, and add the average with list()
